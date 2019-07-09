@@ -30,10 +30,11 @@ ActiveRecord::Schema.define(version: 2019_07_09_163219) do
   create_table "friend_requests", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "receiver_id"
+    t.integer "accepted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_friend_requests_on_receiver_id"
-    t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
+    t.index ["accepted"], name: "index_friend_requests_on_accepted"
+    t.index ["sender_id", "receiver_id"], name: "index_friend_requests_on_sender_id_and_receiver_id", unique: true, where: "(accepted IS NULL)"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -41,8 +42,7 @@ ActiveRecord::Schema.define(version: 2019_07_09_163219) do
     t.integer "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_friendships_on_receiver_id"
-    t.index ["sender_id"], name: "index_friendships_on_sender_id"
+    t.index ["sender_id", "receiver_id"], name: "index_friendships_on_sender_id_and_receiver_id", unique: true
   end
 
   create_table "likes", force: :cascade do |t|

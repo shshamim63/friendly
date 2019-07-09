@@ -8,10 +8,8 @@ class CreateFriendRequests < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :friend_requests, :sender_id
-    add_index :friend_requests, :receiver_id
     add_index :friend_requests, :accepted
-    add_index :friend_requests, [:sender_id, :receiver_id] , unique: true
+    add_index :friend_requests, [:sender_id, :receiver_id] , unique: true, where: "(accepted IS NULL)"
     add_foreign_key :friend_requests, :users, column: :sender_id
     add_foreign_key :friend_requests, :users, column: :receiver_id
   end

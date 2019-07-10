@@ -1,14 +1,15 @@
 class CreateFriendships < ActiveRecord::Migration[5.2]
   def change
     create_table :friendships do |t|
-      t.integer :sender_id
-      t.integer :receiver_id
+      t.references :user_id, foreign_key: true, null: false
+      t.integer :friend_id
+      t.integer :status
 
       t.timestamps
     end
 
-    add_index :friendships, [:sender_id, :receiver_id] , unique: true
-    add_foreign_key :friendships, :users, column: :sender_id
-    add_foreign_key :friendships, :users, column: :receiver_id
+    add_index :friendships, :status
+    add_index :friendships, [:user_id, :friend_id] , unique: true, where: "(status IS NULL)"
+    add_foreign_key :friendships, :users, column: :friend_id
   end
 end

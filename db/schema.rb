@@ -27,16 +27,6 @@ ActiveRecord::Schema.define(version: 2019_07_09_163219) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "friend_requests", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "receiver_id"
-    t.integer "accepted"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["accepted"], name: "index_friend_requests_on_accepted"
-    t.index ["sender_id", "receiver_id"], name: "index_friend_requests_on_sender_id_and_receiver_id", unique: true, where: "(accepted IS NULL)"
-  end
-
   create_table "friendships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "friend_id"
@@ -50,10 +40,12 @@ ActiveRecord::Schema.define(version: 2019_07_09_163219) do
 
   create_table "likes", force: :cascade do |t|
     t.integer "object_id", null: false
+    t.string "object_class", null: false
     t.bigint "user_id", null: false
     t.integer "reaction_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["object_class"], name: "index_likes_on_object_class"
     t.index ["object_id"], name: "index_likes_on_object_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
@@ -88,8 +80,6 @@ ActiveRecord::Schema.define(version: 2019_07_09_163219) do
   add_foreign_key "comments", "comments", column: "reply_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
-  add_foreign_key "friend_requests", "users", column: "receiver_id"
-  add_foreign_key "friend_requests", "users", column: "sender_id"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "likes", "users"

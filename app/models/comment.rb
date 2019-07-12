@@ -3,4 +3,5 @@ class Comment < ApplicationRecord
   belongs_to :post
   belongs_to :reply_from, optional: true, class_name: 'Comment', foreign_key: :reply_id
   has_many :replies, class_name: 'Comment', foreign_key: :reply_id
+  has_many :likes, class_name: 'Like', foreign_key: :object_id
 end

@@ -16,9 +16,9 @@ Post.create(content: 'Orci varius natoque penatibus et magnis dis parturient mon
 Comment.create(content: 'Buen Post', post: Post.first, user: User.third)
 Comment.create(content: 'Gracias!', post: Post.first, user: User.first, reply_from: Comment.first)
 
-Like.create(post: Post.first, object_class: 'Post', user: User.third, reaction_type: 'like')
-Like.create(comment: Comment.first, object_class: 'Comment', user: User.first, reaction_type: 'laugh')
-Like.create(comment: Comment.first, object_class: 'Comment', user: User.fourth, reaction_type: 'dislike')
+Like.create(post: Post.first, user: User.third, reaction_type: 'like')
+Like.create(comment: Comment.first, user: User.first, reaction_type: 'laugh')
+Like.create(comment: Comment.first, user: User.fourth, reaction_type: 'dislike')
 
 Friendship.create(user: User.first, friend: User.second, status: 'accepted')
 Friendship.create(user: User.first, friend: User.third, status: 'accepted')

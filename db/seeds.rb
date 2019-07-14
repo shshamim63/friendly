@@ -16,11 +16,15 @@ Post.create(content: 'Orci varius natoque penatibus et magnis dis parturient mon
 Comment.create(content: 'Buen Post', post: Post.first, user: User.third)
 Comment.create(content: 'Gracias!', post: Post.first, user: User.first, reply_from: Comment.first)
 
-Like.create(post: Post.first, user: User.third, reaction_type: 'like')
-Like.create(comment: Comment.first, user: User.first, reaction_type: 'laugh')
-Like.create(comment: Comment.first, user: User.fourth, reaction_type: 'dislike')
+Like.create(object: Post.first, object_type: 'Post', user: User.third, reaction_type: 'like')
+Like.create(object: Comment.first, object_type: 'Comment', user: User.first, reaction_type: 'laugh')
+Like.create(object: Comment.first, object_type: 'Comment', user: User.fourth, reaction_type: 'dislike')
 
 Friendship.create(user: User.first, friend: User.second, status: 'accepted')
 Friendship.create(user: User.first, friend: User.third, status: 'accepted')
 Friendship.create(user: User.fourth, friend: User.first, status: 'accepted')
 Friendship.create(user: User.second, friend: User.third, status: 'accepted')
+Friendship.create(user: User.second, friend: User.fourth, status: 'rejected')
+Friendship.create(user: User.third, friend: User.fourth, status: 'rejected')
+Friendship.create(user: User.second, friend: User.fourth, status: 'accepted')
+Friendship.create(user: User.second, friend: User.fourth, status: 'unfriended')

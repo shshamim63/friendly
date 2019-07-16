@@ -5,26 +5,108 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create(first_name: 'Homero', last_name: 'Simpson', email: 'homero@simpson.com', password: '123456')
-User.create(first_name: 'Gerald', last_name: 'De Rivia', email: 'gerald@derivia.com', password: '123456')
-User.create(first_name: 'Jhon', last_name: 'Wick', email: 'jhon@wick.com', password: '123456')
-User.create(first_name: 'Tony', last_name: 'Versetti', email: 'tony@versetti.com', password: '123456')
+User.create(
+  first_name: 'Homero',
+  last_name: 'Simpson',
+  email: 'homero@simpson.com',
+  password: '123456'
+)
+User.create(
+  first_name: 'Gerald',
+  last_name: 'De Rivia',
+  email: 'gerald@derivia.com',
+  password: '123456'
+)
+User.create(
+  first_name: 'Jhon',
+  last_name: 'Wick',
+  email: 'jhon@wick.com',
+  password: '123456'
+)
+User.create(
+  first_name: 'Tony',
+  last_name: 'Versetti',
+  email: 'tony@versetti.com',
+  password: '123456'
+)
 
-Post.create(content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', user: User.first)
-Post.create(content: 'Orci varius natoque penatibus et magnis dis parturient montes.', user: User.second)
+Post.create(
+  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  user: User.first
+)
+Post.create(
+  content: 'Orci varius natoque et magnis dis parturient montes.',
+  user: User.second
+)
 
-Comment.create(content: 'Buen Post', post: Post.first, user: User.third)
-Comment.create(content: 'Gracias!', post: Post.first, user: User.first, reply_from: Comment.first)
+Comment.create(
+  content: 'Buen Post',
+  post: Post.first,
+  user: User.third
+)
+Comment.create(
+  content: 'Gracias!',
+  post: Post.first,
+  user: User.first,
+  reply_from: Comment.first
+)
 
-Like.create(object: Post.first, object_type: 'Post', user: User.third, reaction_type: 'like')
-Like.create(object: Comment.first, object_type: 'Comment', user: User.first, reaction_type: 'laugh')
-Like.create(object: Comment.first, object_type: 'Comment', user: User.fourth, reaction_type: 'dislike')
+Like.create(
+  object: Post.first,
+  object_type: 'Post',
+  user: User.third,
+  reaction_type: 'like'
+)
+Like.create(
+  object: Comment.first,
+  object_type: 'Comment',
+  user: User.first,
+  reaction_type: 'laugh'
+)
+Like.create(
+  object: Comment.first,
+  object_type: 'Comment',
+  user: User.fourth,
+  reaction_type: 'dislike'
+)
 
-Friendship.create(user: User.first, friend: User.second, status: 'accepted')
-Friendship.create(user: User.first, friend: User.third, status: 'accepted')
-Friendship.create(user: User.fourth, friend: User.first, status: 'accepted')
-Friendship.create(user: User.second, friend: User.third, status: 'accepted')
-Friendship.create(user: User.second, friend: User.fourth, status: 'rejected')
-Friendship.create(user: User.third, friend: User.fourth, status: 'rejected')
-Friendship.create(user: User.second, friend: User.fourth, status: 'accepted')
-Friendship.create(user: User.second, friend: User.fourth, status: 'unfriended')
+Friendship.create(
+  user: User.first,
+  friend: User.second,
+  status: 'accepted'
+)
+Friendship.create(
+  user: User.first,
+  friend: User.third,
+  status: 'accepted'
+)
+Friendship.create(
+  user: User.fourth,
+  friend: User.first,
+  status: 'accepted'
+)
+Friendship.create(
+  user: User.second,
+  friend: User.third,
+  status: 'accepted'
+)
+Friendship.create(
+  user: User.second,
+  friend: User.fourth,
+  status: 'rejected'
+)
+Friendship.create(
+  user: User.third,
+  friend: User.fourth,
+  status: 'rejected'
+)
+Friendship.create(
+  user: User.second,
+  friend: User.fourth,
+  status: 'accepted'
+)
+Friendship.create(
+  user: User.second,
+  friend: User.fourth,
+  status: 'unfriended'
+)

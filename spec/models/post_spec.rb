@@ -26,4 +26,10 @@ describe Post, type: :model do
       end
     end
   end
+
+  describe "post's associations" do
+    it { belong_to(:user) }
+    it { have_many(:likes) }
+    it { have_many(:comments) }
+  end
 end

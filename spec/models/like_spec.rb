@@ -10,4 +10,10 @@ describe Like, type: :model do
       end
     end
   end
+
+  describe "likes's associations" do
+    it { should define_enum_for(:reaction_type).with_values([ :like, :dislike, :laugh ]) }
+    it { should belong_to(:object) }
+    it { should belong_to(:user) }
+  end
 end

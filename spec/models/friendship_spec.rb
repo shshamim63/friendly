@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe Friendship, type: :model do
+  describe 'Friendship associations' do
+    it { should define_enum_for(:status).with_values([ :accepted, :rejected, :unfriended ]) }
+    it { should belong_to(:friend).class_name('User').with_foreign_key(:friend_id) }
+    it { should belong_to(:user) }
+  end
+
   describe 'still_friends?' do
     let(:user) { create(:user) }
     let(:friend) { create(:user) }

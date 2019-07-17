@@ -35,6 +35,17 @@ describe User, type: :model do
     end
   end
 
+  describe "user's associations" do
+    it { should have_many(:posts).dependent(:destroy) }
+    it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:likes).dependent(:destroy) }
+    it { should have_many(:friendships).conditions(status: 'accepted') }
+    it { should have_many(:inverse_friendships)
+      .conditions(status: 'accepted')
+      .class_name('Friendship')
+      .with_foreign_key(:friend_id) }
+  end
+
   describe "friends" do
     context 'when user is friend and inverse friend' do
       let!(:user1) { create(:user) }

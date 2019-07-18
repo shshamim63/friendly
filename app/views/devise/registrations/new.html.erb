@@ -44,8 +44,8 @@
 
   <div class="form_row">
     <%= f.label :gender %>
-    <% [ 'male', 'female', 'other'].each do |gender| %>
-      <%= radio_button_tag :gender, gender %>
+    <% User.genders.keys.each do |gender| %>
+      <%= f.radio_button :gender, gender %>
       <%= gender.humanize %>
     <% end %>
   </div>

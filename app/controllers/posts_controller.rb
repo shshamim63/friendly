@@ -3,20 +3,17 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
   def index
+    @post = Post.new
     @posts = current_user.posts
     ids = current_user.friends.pluck(:id)
     @friendspost = Post.where("user_id IN (?)", ids)
     @all_post = @posts.or(@friendspost).order(created_at: :desc)
   end
 
-  def new
-    @post = Post.new
-  end
-
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to :root
+      redirect_to posts_path
       flash.now[:success] = 'Post was successfully created.'
     else
       render 'new'

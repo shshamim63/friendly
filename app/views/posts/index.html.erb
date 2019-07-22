@@ -1,14 +1,33 @@
 <div class="columns">
   <div class="column">
-    <%= render 'profile', current_user: @user %>
+    <%= render 'profile', user: current_user %>
   </div>
   <div class="column is-three-fifths">
     <%= render 'form', post: @post %>
+    <br>
     <% @all_post.each do |p| %>
       <ol class="microposts">
+        <div>
+          <article class="media">
+      			<div class="media-left">
+      				<figure class="image is-64x64">
+                <%= gravatar_image_tag(p.user.email, size: 64, alt: p.user.username) %>
+      				</figure>
+      			</div>
+      			<div class="media-content">
+      				<div class="content">
+      					<p>
+                  <strong><%= "#{p.user.username}" %></strong><br>
+      					</p>
+                <small> <%= time_ago_in_words(p.created_at) %> </small>
+      				</div>
+      			</div>
+      		</article>
         <%= p.content %>
       </ol>
     <% end %>
   </div>
-  <div class="column">Auto</div>
+  <div class="column">
+    <%= render 'friendlist', user: current_user %>
+  </div>
 </div>

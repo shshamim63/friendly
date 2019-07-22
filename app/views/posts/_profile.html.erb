@@ -1,0 +1,21 @@
+<nav class="panel">
+	<p class="panel-heading">Profile</p>
+	<div class="panel-block">
+		<article class="media">
+			<div class="media-left">
+				<figure class="image is-64x64">
+          <%= gravatar_image_tag(user.email, size: 64, alt: user.username) %>
+				</figure>
+			</div>
+			<div class="media-content">
+				<div class="content">
+					<p>
+            <strong><%= "#{user.first_name} #{user.last_name}" %></strong><br />
+						<small><%= "#{user.username}" %></small>
+					</p>
+				</div>
+			</div>
+		</article>
+	</div>
+  <p>Birthdate: <%= user.birthday.to_formatted_s(:long) %></p>
+</nav>

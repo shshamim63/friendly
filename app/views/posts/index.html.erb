@@ -1,5 +1,7 @@
 <div class="columns">
-  <div class="column">Auto</div>
+  <div class="column">
+    <%= render 'profile', current_user: @user %>
+  </div>
   <div class="column is-three-fifths">
     <%= render 'form', post: @post %>
     <% @all_post.each do |p| %>

@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @posts = current_user.posts
     ids = current_user.friends.pluck(:id)
     @friendspost = Post.where("user_id IN (?)", ids)
-    @all_post = @posts.or(@friendspost).order(created_at: :desc)
+    @all_post = (@posts+@friendspost)
   end
 
   def create

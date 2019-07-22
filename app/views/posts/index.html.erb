@@ -1,5 +1,11 @@
-<% @all_post.each do |p| %>
-  <ol class="microposts">
-    <%= p.content %>
-  </ol>
-<% end %>
+<div class="columns">
+  <div class="column">Auto</div>
+  <div class="column is-three-fifths">
+    <% @all_post.each do |p| %>
+      <ol class="microposts">
+        <%= p.content %>
+      </ol>
+    <% end %>
+  </div>
+  <div class="column">Auto</div>
+</div>

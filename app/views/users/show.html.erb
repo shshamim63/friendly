@@ -1,0 +1,38 @@
+<div class="columns">
+  <div class="column">
+    <%= render 'posts/profile', user: @user %>
+    <%= render 'posts/friendlist', user: @user %>
+  </div>
+  <div class="column is-three-fifths">
+    <% if @user == current_user %>
+      <%= render 'posts/form', post: @post %>
+    <% end %>
+    <br>
+    <% @posts.each do |post| %>
+      <ol class="microposts">
+        <div>
+          <article class="media">
+      			<div class="media-left">
+      				<figure class="image is-64x64">
+                <%= gravatar_image_tag(post.user.email, size: 64, alt: post.user.username) %>
+      				</figure>
+      			</div>
+      			<div class="media-content">
+      				<div class="content">
+      					<p>
+                  <strong> <%= link_to "#{post.user.username}", user_path(id: post.user.id) %></strong>
+      					</p>
+                <small> <%= time_ago_in_words(post.created_at) %> </small>
+      				</div>
+      			</div>
+      		</article>
+        <%= post.content %>
+      </ol>
+      <%= render 'posts/comments', post: post %>
+      <%= render 'posts/comment_form', post: post %>
+      <% if post.comments.count > 2 %>
+        <%= link_to 'View more Comments', posts_path %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <% post.comments.each do |comment| %>
+  <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong> 
   <%= comment.content %>
   <br>
 <% end %>
-<%= render 'commentform', user: current_user, post: post %>

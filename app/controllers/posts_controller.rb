@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
+    @comment = Comment.new
     user_with_posts_to_show = current_user.friends
     user_with_posts_to_show << current_user
     @posts = Post.timeline(user_with_posts_to_show)

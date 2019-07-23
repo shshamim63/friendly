@@ -4,14 +4,14 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = current_user.posts
-    ids = current_user.friends.pluck(:id)
-    @friendspost = Post.where("user_id IN (?)", ids)
-    @all_post = ( @posts + @friendspost ).sort_by( &:created_at ).reverse
+    user_with_posts_to_show = current_user.friends
+    user_with_posts_to_show << current_user
+    @posts = Post.timeline(user_with_posts_to_show)
   end
 
   def create
     @post = current_user.posts.build(post_params)
+
     if @post.save
       redirect_to posts_path
       flash.now[:success] = 'Post was successfully created.'

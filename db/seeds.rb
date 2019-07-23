@@ -68,8 +68,7 @@ Comment.create(
 Comment.create(
   content: 'Gracias!',
   post: Post.first,
-  user: User.first,
-  reply_from: Comment.first
+  user: User.first
 )
 
 Like.create(

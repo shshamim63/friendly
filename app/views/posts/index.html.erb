@@ -5,26 +5,27 @@
   <div class="column is-three-fifths">
     <%= render 'form', post: @post %>
     <br>
-    <% @all_post.each do |p| %>
+    <% @posts.each do |post| %>
       <ol class="microposts">
         <div>
           <article class="media">
       			<div class="media-left">
       				<figure class="image is-64x64">
-                <%= gravatar_image_tag(p.user.email, size: 64, alt: p.user.username) %>
+                <%= gravatar_image_tag(post.user.email, size: 64, alt: post.user.username) %>
       				</figure>
       			</div>
       			<div class="media-content">
       				<div class="content">
       					<p>
-                  <strong><%= "#{p.user.username}" %></strong><br>
+                  <strong><%= "#{post.user.username}" %></strong><br>
       					</p>
-                <small> <%= time_ago_in_words(p.created_at) %> </small>
+                <small> <%= time_ago_in_words(post.created_at) %> </small>
       				</div>
       			</div>
       		</article>
-        <%= p.content %>
+        <%= post.content %>
       </ol>
+      <%= render 'comments', post: post %>
     <% end %>
   </div>
   <div class="column">

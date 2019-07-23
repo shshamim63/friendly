@@ -2,4 +2,4 @@
   <%= comment.content %>
   <br>
 <% end %>
-<%= render 'commentform', comment: @comment %>
+<%= render 'commentform', user: current_user, post: post %>

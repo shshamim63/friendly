@@ -15,9 +15,7 @@
       <div class="navbar-item">
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item">
-              User
-            </a>
+            <strong><%= link_to "#{current_user.username}", user_path(id: current_user.id), class: "navbar-item" %></strong>
 
             <a class="navbar-item">
               Notification

@@ -30,11 +30,12 @@ class PostsController < ApplicationController
   end
 
   def edit
+    session[:return_to] ||= request.referer
   end
 
   def update
     if @post.update(post_params)
-      redirect_to @post
+      redirect_to session.delete(:return_to)
       flash.now[:success] = 'Post was successfully updated.'
     else
       render 'edit'
@@ -43,7 +44,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to :root
+    redirect_to root_path
     flash.now[:danger] = 'Post was successfully destroyed.'
   end
 

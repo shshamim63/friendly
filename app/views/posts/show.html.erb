@@ -1,2 +1,25 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<div class="columns">
+  <div class="column is-three-fifths">
+    <ol class="microposts">
+      <div>
+        <article class="media">
+    			<div class="media-left">
+    				<figure class="image is-64x64">
+              <%= gravatar_image_tag(@post.user.email, size: 64, alt: @post.user.username) %>
+    				</figure>
+    			</div>
+    			<div class="media-content">
+    				<div class="content">
+    					<p>
+                <strong> <%= link_to "#{@post.user.username}", user_path(id: @post.user.id) %></strong>
+    					</p>
+              <small> <%= time_ago_in_words(@post.created_at) %> </small>
+    				</div>
+    			</div>
+    		</article>
+      <%= @post.content %>
+    </ol>
+    <%= render 'comment_form', post: @post %>
+    <%= render 'comments', post: @post %>
+  </div>
+</div>

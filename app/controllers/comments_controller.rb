@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(user_id: current_user.id, content: params[:comment][:content])
 
     if @comment.save
-      redirect_to posts_path
+      redirect_back fallback_location: root_path
       flash.now[:success] = 'Comment was successfully created.'
     end
   end

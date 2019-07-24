@@ -1,13 +1,17 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show]
+  before_action :set_post, only: [:edit, :update, :destroy, :show]
+  before_action :authenticate_user!
 
   def index
-    @post = Post.new
-    @comment = Comment.new
-    user_with_posts_to_show = current_user.friends
-    user_with_posts_to_show << current_user
-    @posts = Post.timeline(user_with_posts_to_show)
+    if user_signed_in?
+      @post = Post.new
+      @comment = Comment.new
+      user_with_posts_to_show = current_user.friends
+      user_with_posts_to_show << current_user
+      @posts = Post.timeline(user_with_posts_to_show)
+    else
+      redirect_to new_user_registration_path
+    end
   end
 
   def create
@@ -22,6 +26,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
   end
 
   def edit

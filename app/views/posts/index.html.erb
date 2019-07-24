@@ -17,7 +17,7 @@
       			<div class="media-content">
       				<div class="content">
       					<p>
-                  <strong> <%= link_to "#{post.user.username}", user_path(id: post.user.id) %></strong> 
+                  <strong> <%= link_to "#{post.user.username}", user_path(id: post.user.id) %></strong>
       					</p>
                 <small> <%= time_ago_in_words(post.created_at) %> </small>
       				</div>
@@ -27,8 +27,8 @@
       </ol>
       <%= render 'comments', post: post %>
       <%= render 'comment_form', post: post %>
-      <% if post.comments.count > 1 %>
-        <%= link_to 'View more Comments', posts_path %>
+      <% if post.comments.count > 3 %>
+        <%= link_to 'View more Comments', post_path(id: post.id) %>
       <% end %>
     <% end %>
   </div>

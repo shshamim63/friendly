@@ -1,9 +1,18 @@
 <% @user.each do |user| %>
+<% current_status = Friendship.current_status?(current_user, user) %>
   <%= user.full_name %><br>
-  <% if current_user.friend?(user) %>
+  <% if current_status&.accepted? %>
     <%= link_to 'Unfriend', unfriend_user_friendships_path(user_id: user.id), method: :post %><br><br>
   <% else %>
-  
-    <%= link_to 'Add', add_user_friendships_path(user_id: user.id), method: :post %><br><br>
+    <% if current_status&.pending? %>
+      <% if current_status.user == current_user %>
+        Waiting Response<br><br>
+      <% else %>
+        <%= link_to 'Accept', accept_user_friendships_path(user_id: user.id), method: :post %><br>
+        <%= link_to 'Reject', reject_user_friendships_path(user_id: user.id), method: :post %><br><br>
+      <% end %>
+    <% else %>
+      <%= link_to 'Add', add_user_friendships_path(user_id: user.id), method: :post %><br><br>
+    <% end %>
   <% end %>
 <% end %>

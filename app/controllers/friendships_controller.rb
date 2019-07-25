@@ -3,26 +3,32 @@ class FriendshipsController < ApplicationController
   before_action :find_user
 
   def add
-    record1 = Friendship.current_status?(current_user, @user)
-    record2 = Friendship.current_status?(@user, current_user)
-    record1.id > record2.id ? record = record1 : record = record2
-    
-    if record.present?
-      friendship = Friendship.new(user_id: record.user_id, friend_id: record.friend_id, status: 'pending')
+    friendship = current_user.friendships.build(friend: @user, status: 'pending')
 
-      if friendship.save
-        redirect_to users_path
-      end
+    if friendship.save
+      redirect_to users_path
     end
-    redirect_to users_path
   end
 
   def unfriend
-    if Friendship.still_friends?( current_user, @user)
-      friendship = current_user.friendships.build(friend: @user, status: 'unfriended')
-    else
-      friendship = @user.friendships.build(friend: current_user, status: 'unfriended')
+    friendship = current_user.friendships.build(friend: @user, status: 'unfriended')
+
+    if friendship.save
+      redirect_to users_path
     end
+  end
+
+  def accept
+    friendship = current_user.friendships.build(friend: @user, status: 'accepted')
+
+    if friendship.save
+      redirect_to users_path
+    end
+  end
+
+  def reject
+    friendship = current_user.friendships.build(friend: @user, status: 'rejected')
+
     if friendship.save
       redirect_to users_path
     end

@@ -11,9 +11,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :friendships, -> { where status: 'accepted' }
-  has_many :inverse_friendships, -> { where status: 'accepted' },
-   class_name: 'Friendship', foreign_key: :friend_id
+  has_many :friendships
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: :friend_id
 
 
   validates :email, presence: true, length: { maximum: 255 }
@@ -23,17 +22,17 @@ class User < ApplicationRecord
   def friends
     friends_array = friendships.map do |friendship|
       friend = friendship.friend
-      friend if Friendship.still_friends?(self, friend)
+      friend if Friendship.current_status?(self, friend)&.accepted?
     end
     inverse_friends_array = inverse_friendships.map do  |friendship|
       friend = friendship.user
-      friend if Friendship.still_friends?(friend, self)
+      friend if Friendship.current_status?(friend, self)&.accepted?
     end
     (friends_array + inverse_friends_array).compact
   end
 
   def friend?(user)
-    Friendship.still_friends?(user, self) || Friendship.still_friends?(self, user)
+    Friendship.current_status?(user, self)&.accepted?
   end
 
   def full_name

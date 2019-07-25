@@ -33,6 +33,9 @@
           <% end %>
     		</article>
       <%= @post.content %>
+      <br><br>
+        <%= link_to 'Like', create_likes_path(object_type: @post.class.name, object_id: @post.id, like: { reaction_type: 'like' }), method: :post %>
+      <br><br>
     </ol>
     <%= render 'comment_form', post: @post %>
     <%= render 'comments', post: @post %>

@@ -5,11 +5,8 @@ class FriendshipsController < ApplicationController
   def add
     record1 = Friendship.current_status?(current_user, @user)
     record2 = Friendship.current_status?(@user, current_user)
-    if record1.id > record2.id
-      record = record1
-    else
-      record = record2
-    end
+    record1.id > record2.id ? record = record1 : record = record2
+    
     if record.present?
       friendship = Friendship.new(user_id: record.user_id, friend_id: record.friend_id, status: 'pending')
 

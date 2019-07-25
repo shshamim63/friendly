@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @friends = User.all
+    @user = User.all_except(current_user)
   end
 
   def new

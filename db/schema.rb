@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_07_09_163219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["status"], name: "index_friendships_on_status"
-    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true, where: "(status IS NULL)"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true, where: "(status = 0)"
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   enum gender: [ :male, :female, :other ]
 
+  scope :all_except, ->(user) { where.not(id: user) }
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -28,5 +30,13 @@ class User < ApplicationRecord
       friend if Friendship.still_friends?(friend, self)
     end
     (friends_array + inverse_friends_array).compact
+  end
+
+  def friend?(user)
+    Friendship.still_friends?(user, self) || Friendship.still_friends?(self, user)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

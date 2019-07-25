@@ -1,2 +1,9 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<% @user.each do |user| %>
+  <%= user.full_name %><br>
+  <% if current_user.friend?(user) %>
+    <%= link_to 'Unfriend', unfriend_user_friendships_path(user_id: user.id), method: :post %><br><br>
+  <% else %>
+  
+    <%= link_to 'Add', add_user_friendships_path(user_id: user.id), method: :post %><br><br>
+  <% end %>
+<% end %>

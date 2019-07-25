@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
+  root 'posts#index'
+
+  devise_for :users
+
   resources :posts  do
     resources :comments
   end
-  root 'posts#index'
-  devise_for :users
-  resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :users do
+    resources :friendships, except: [:index, :new, :create, :edit, :update, :show, :destroy] do
+      collection do
+        post :add, to: 'friendships#add'
+        post :unfriend, to: 'friendships#unfriend'
+      end
+    end
+  end
 end

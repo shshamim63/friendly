@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @post = Post.new
     @comment = Comment.new
     @posts = @user.posts
+    
   end
 
   def edit

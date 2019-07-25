@@ -1,8 +1,6 @@
 <nav class="navbar is-info is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-      <%= link_to image_tag("https://bulma.io/images/bulma-logo.png", class: "img-responsive", id: "logo"), root_path %>
-    </a>
+    <%= link_to image_tag("https://bulma.io/images/bulma-logo.png", class: "img-responsive navbar-item", id: "logo"), root_path %>
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -23,7 +21,14 @@
 
             <strong><%= link_to "Connect", users_path, class: "navbar-item" %></strong>
 
-            <div class="navbar-item has-dropdown is-hoverable">
+            <div  class="navbar-item has-dropdown is-hoverable">
+              <div class="dropdown-trigger">
+                <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu3">
+                  <span class="icon">
+                    <i class="fas fa-sort-down is-darker"></i>
+                  </span>
+                </button>
+              </div>
               <div class="navbar-dropdown is-right">
                 <%= link_to "Edit", edit_user_path(id: current_user.id), class: "navbar-item" %>
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "navbar-item" %>

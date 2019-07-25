@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user
+  before_action :find_user, only: [ :show ]
   before_action :authenticate_user!
 
   def index
@@ -16,7 +16,6 @@ class UsersController < ApplicationController
     @post = Post.new
     @comment = Comment.new
     @posts = @user.posts
-    
   end
 
   def edit

@@ -24,16 +24,9 @@
             <strong><%= link_to "Connect", users_path, class: "navbar-item" %></strong>
 
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-              </a>
-
               <div class="navbar-dropdown is-right">
-                <a class="navbar-item">
-                  Edit
-                </a>
-                <a class="navbar-item">
-                  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-                </a>
+                <%= link_to "Edit", edit_user_path(id: current_user.id), class: "navbar-item" %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "navbar-item" %>
               </div>
             </div>
           </div>

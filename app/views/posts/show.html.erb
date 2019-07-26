@@ -33,8 +33,22 @@
           <% end %>
     		</article>
       <%= @post.content %>
+      <%= render 'reaction_count', post: @post %>
       <br><br>
-        <%= link_to 'Like', create_likes_path(object_type: @post.class.name, object_id: @post.id, like: { reaction_type: 'like' }), method: :post %>
+      <div  class="navbar-item has-dropdown is-hoverable">
+        <div class="dropdown-trigger">
+          <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu3">
+            <span class="icon">
+              <i class="fas fa-sort-down is-darker"></i>
+            </span>
+          </button>
+        </div>
+        <div class="navbar-dropdown is-right">
+          <%= link_to 'Like', create_likes_path(object_type: @post.class.name, object_id: @post.id, like: { reaction_type: 'like' }), method: :post %>
+          <%= link_to 'Dislike', create_likes_path(object_type: @post.class.name, object_id: @post.id, like: { reaction_type: 'dislike' }), method: :post %>
+          <%= link_to 'Laugh', create_likes_path(object_type: @post.class.name, object_id: @post.id, like: { reaction_type: 'laugh' }), method: :post %>
+        </div>
+      </div>
       <br><br>
     </ol>
     <%= render 'comment_form', post: @post %>

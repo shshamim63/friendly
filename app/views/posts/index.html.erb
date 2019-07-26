@@ -42,7 +42,9 @@
         </div>
       </ol>
       <%= render 'comments', post: post %>
-      <%= render 'comment_form', post: post %>
+      <% if current_user.friend?(post.user) || current_user== post.user %>
+        <%= render 'comment_form', post: post %>
+      <% end %>
       <% if post.comments.count > 1 %>
         <%= link_to 'View more Comments', post_path(id: post.id) %>
       <% end %>

@@ -35,6 +35,6 @@ class LikesController < ApplicationController
   end
 
   def set_like
-    @like = Like.find_by(object_type: params[:object_type], object_id: params[:object_id])
+    @like = Like.find_by(object_type: params[:object_type], object_id: params[:object_id], user_id: current_user)
   end
 end

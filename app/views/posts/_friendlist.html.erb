@@ -1,17 +1,18 @@
 <% friends = user.friends %>
 <div class="">
   <p>Friends(<%= friends.count %>)</p>
-  <% friends.each do |f| %>
+  <% friends.each do |friend| %>
     <article class="media">
       <div class="media-left">
         <figure class="image is-64x64">
-          <%= gravatar_image_tag(f.email, size: 64, alt: f.username) %>
+          <%= gravatar_image_tag(friend.email, size: 64, alt: friend.username) %>
         </figure>
       </div>
       <div class="media-content">
         <div class="content">
           <p>
-            <small><%= "#{f.username}" %></small
+            <small><%=  %></small
+              <strong> <%= link_to "#{friend.username}", user_path(id: friend.id) %></strong>
           </p>
         </div>
       </div>

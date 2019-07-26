@@ -44,9 +44,9 @@
           </button>
         </div>
         <div class="navbar-dropdown is-right">
-          <%= link_to 'Like', create_likes_path(object_type: @post.class.name, object_id: @post.id, like: { reaction_type: 'like' }), method: :post %>
-          <%= link_to 'Dislike', create_likes_path(object_type: @post.class.name, object_id: @post.id, like: { reaction_type: 'dislike' }), method: :post %>
-          <%= link_to 'Laugh', create_likes_path(object_type: @post.class.name, object_id: @post.id, like: { reaction_type: 'laugh' }), method: :post %>
+          <%= link_to 'Like', liker( @post.class.name, @post.id, 'like' ), method: :delete %>
+          <%= link_to 'Dislike', liker( @post.class.name, @post.id, 'dislike'), method: :post %>
+          <%= link_to 'Laugh', liker( @post.class.name, @post.id, 'laugh' ), method: :post %>
         </div>
       </div>
       <br><br>

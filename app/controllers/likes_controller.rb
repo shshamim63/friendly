@@ -26,6 +26,7 @@ class LikesController < ApplicationController
 
   def destroy
     @like.destroy
+    redirect_back fallback_location: root_path
   end
 
   private

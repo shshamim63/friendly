@@ -1,7 +1,7 @@
 <% post.comments.each do |comment| %>
   <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong>
   <%= comment.content %>
-  <%= render 'posts/reaction_count', object: comment %>
-  <%= render 'posts/reaction', object: comment %>
+  <%= render 'likes/reaction_count', object: comment %>
+  <%= render 'likes/reaction', object: comment %>
   <br>
 <% end %>

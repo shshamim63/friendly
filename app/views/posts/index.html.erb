@@ -39,6 +39,9 @@
             <% end %>
       		</article>
           <%= post.content %>
+          <%= render 'likes/reaction_count', object: post %>
+          <%= render 'likes/reaction', object: post %>
+          <br>
         </div>
       </ol>
       <%= render 'comments', post: post %>

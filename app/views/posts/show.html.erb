@@ -33,10 +33,9 @@
           <% end %>
     		</article>
       <%= @post.content %>
-      <%= render 'reaction_count', object: @post %>
-      <br><br>
-      <%= render 'layout/reaction', object: @post %>
-      <br><br>
+      <%= render 'likes/reaction_count', object: @post %>
+      <%= render 'likes/reaction', object: @post %>
+      <br>
     </ol>
     <%= render 'comment_form', post: @post %>
     <%= render 'comments', post: @post %>

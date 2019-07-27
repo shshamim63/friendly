@@ -44,9 +44,9 @@
           </button>
         </div>
         <div class="navbar-dropdown is-right">
-          <%= link_to 'Like', liker( @post.class.name, @post.id, 'like' ), method: :delete %>
-          <%= link_to 'Dislike', liker( @post.class.name, @post.id, 'dislike'), method: :post %>
-          <%= link_to 'Laugh', liker( @post.class.name, @post.id, 'laugh' ), method: :post %>
+          <%= link_to '<i class="fas fa-thumbs-up"></i>'.html_safe, liker( @post.class.name, @post.id, 'like' ), method: liker_method( @post.class.name, @post.id, 'like' ) %>
+          <%= link_to '<i class="fas fa-thumbs-down"></i>'.html_safe, liker( @post.class.name, @post.id, 'dislike'), method: liker_method( @post.class.name, @post.id, 'dislike' ) %>
+          <%= link_to '<i class="fas fa-grin-squint"></i>'.html_safe, liker( @post.class.name, @post.id, 'laugh' ), method: liker_method( @post.class.name, @post.id, 'laugh' ) %>
         </div>
       </div>
       <br><br>

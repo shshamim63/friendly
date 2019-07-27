@@ -1,20 +1,7 @@
 <% post.comments.each do |comment| %>
   <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong>
   <%= comment.content %>
-  <%= render 'posts/reaction_comment_count', post: comment %>
-  <div  class="navbar-item has-dropdown is-hoverable">
-    <div class="dropdown-trigger">
-      <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu3">
-        <span class="icon">
-          <i class="fas fa-sort-down is-darker"></i>
-        </span>
-      </button>
-    </div>
-    <div class="navbar-dropdown is-right">
-      <%= link_to '<i class="fas fa-thumbs-up"></i>'.html_safe, liker( comment.class.name, comment.id, 'like' ), method: liker_method( comment.class.name, comment.id, 'like' ) %>
-      <%= link_to '<i class="fas fa-thumbs-down"></i>'.html_safe, liker( comment.class.name, comment.id, 'dislike'), method: liker_method( comment.class.name, comment.id, 'dislike' ) %>
-      <%= link_to '<i class="fas fa-grin-squint"></i>'.html_safe, liker( comment.class.name, comment.id, 'laugh' ), method: liker_method( comment.class.name, comment.id, 'laugh' ) %>
-    </div>
-  </div>
+  <%= render 'posts/reaction_count', object: comment %>
+  <%= render 'posts/reaction', object: comment %>
   <br>
 <% end %>

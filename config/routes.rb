@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         post :unfriend, to: 'friendships#unfriend'
         post :accept, to: 'friendships#accept'
         post :reject, to: 'friendships#reject'
+        delete :cancelled, to: 'friendships#cancelled'
       end
     end
   end

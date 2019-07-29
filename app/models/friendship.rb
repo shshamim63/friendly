@@ -1,5 +1,5 @@
 class Friendship < ApplicationRecord
-  enum status: [ :pending, :accepted, :rejected, :unfriended ]
+  enum status: [ :pending, :accepted, :rejected, :unfriended, :cancelled ]
 
   belongs_to :user
   belongs_to :friend, class_name: 'User', foreign_key: :friend_id

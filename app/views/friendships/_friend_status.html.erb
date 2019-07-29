@@ -1,0 +1,15 @@
+<% current_status = Friendship.current_status?(current_user, user) %>
+<% if current_status&.accepted? %>
+  <%= link_to 'Unfriend', unfriend_user_friendships_path(user_id: user.id), method: :post %><br><br>
+<% else %>
+  <% if current_status&.pending? %>
+    <% if current_status.user == current_user %>
+      Pending <%= link_to 'Cancel Friend Request', cancelled_user_friendships_path(user_id: user.id), method: :post %><br><br>
+    <% else %>
+      <%= link_to 'Accept', accept_user_friendships_path(user_id: user.id), method: :post %><br>
+      <%= link_to 'Reject', reject_user_friendships_path(user_id: user.id), method: :post %><br><br>
+    <% end %>
+  <% else %>
+    <%= link_to 'Add', add_user_friendships_path(user_id: user.id), method: :post %><br><br>
+  <% end %>
+<% end %>

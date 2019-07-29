@@ -6,7 +6,7 @@ class FriendshipsController < ApplicationController
     friendship = current_user.friendships.build(friend: @user, status: 'pending')
 
     if friendship.save
-      redirect_to users_path
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -14,7 +14,7 @@ class FriendshipsController < ApplicationController
     friendship = current_user.friendships.build(friend: @user, status: 'unfriended')
 
     if friendship.save
-      redirect_to users_path
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -22,7 +22,7 @@ class FriendshipsController < ApplicationController
     friendship = current_user.friendships.build(friend: @user, status: 'accepted')
 
     if friendship.save
-      redirect_to users_path
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -30,8 +30,15 @@ class FriendshipsController < ApplicationController
     friendship = current_user.friendships.build(friend: @user, status: 'rejected')
 
     if friendship.save
-      redirect_to users_path
+      redirect_back fallback_location: root_path
     end
+  end
+
+  def cancelled
+    friendship = current_user.friendships.build(friend: @user, status: 'cancelled')
+
+    friendship.save
+    redirect_back fallback_location: root_path
   end
 
   private

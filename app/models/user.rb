@@ -28,15 +28,15 @@ class User < ApplicationRecord
       friend = friendship.user
       friend if Friendship.current_status?(friend, self)&.accepted?
     end
-    (friends_array + inverse_friends_array).compact
+    (friends_array + inverse_friends_array).compact.uniq
   end
-  
+
   def pending
-    inverse_pending_array = inverse_friendships.map do  |friendship|
+    pending_array = friendships.map do  |friendship|
       friend = friendship.user
-      friend if Friendship.current_status?(friend, self)&.pending?
+      friend if Friendship.current_status?(self, friend)&.pending?
     end
-    (inverse_pending_array).compact
+    pending_array.compact.uniq
   end
 
   def friend?(user)

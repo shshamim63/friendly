@@ -19,13 +19,13 @@
               <div class="dropdown-trigger">
                 <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu3">
                   <span class="icon">
-                    <% pendinglist = current_user.pending %>
-                    <i class="fas fa-bell is-darker"><%= pendinglist.count %></i>
+                    <% pending_list = current_user.pending(current_user) %>
+                    <i class="fas fa-bell is-darker"><%= pending_list.count %></i>
                   </span>
                 </button>
               </div>
               <ol class="navbar-dropdown is-right">
-                <% pendinglist.each do |user|%>
+                <% pending_list.each do |user|%>
                   <li href="#" class="navbar-item">
                     <%= user.full_name%><br>
                     <%= link_to 'Accept', accept_user_friendships_path(user_id: user.id), method: :post %><br>

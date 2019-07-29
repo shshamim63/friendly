@@ -31,10 +31,11 @@ class User < ApplicationRecord
     (friends_array + inverse_friends_array).compact.uniq
   end
 
-  def pending
-    pending_array = friendships.map do  |friendship|
+  def pending(logged_in_user)
+    pending_array = inverse_friendships.map do  |friendship|
       friend = friendship.user
-      friend if Friendship.current_status?(self, friend)&.pending?
+      friendship = Friendship.current_status?(friend, self)
+      friend if friendship&.pending? && friendship.user != logged_in_user
     end
     pending_array.compact.uniq
   end

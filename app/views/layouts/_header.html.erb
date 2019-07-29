@@ -15,9 +15,25 @@
           <div class="navbar-start">
             <strong><%= link_to "#{current_user.username}", user_path(id: current_user.id), class: "navbar-item" %></strong>
 
-            <a class="navbar-item">
-              Notification
-            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <div class="dropdown-trigger">
+                <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu3">
+                  <span class="icon">
+                    <% pendinglist = current_user.pending %>
+                    <i class="fas fa-bell is-darker"><%= pendinglist.size %></i>
+                  </span>
+                </button>
+              </div>
+              <ol class="navbar-dropdown is-right">
+                <% pendinglist.each do |user|%>
+                  <li href="#" class="navbar-item">
+                    <%= user.full_name%><br>
+                    <%= link_to 'Accept', accept_user_friendships_path(user_id: user.id), method: :post %><br>
+                    <%= link_to 'Reject', reject_user_friendships_path(user_id: user.id), method: :post %><br><br>
+                  </li>
+                <% end %>
+              </ol>
+            </div>
 
             <strong><%= link_to "Connect", users_path, class: "navbar-item" %></strong>
 

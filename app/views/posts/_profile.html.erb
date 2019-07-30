@@ -3,8 +3,8 @@
 	<div class="panel-block">
 		<article class="media">
 			<div class="media-left">
-				<figure class="image is-64x64">
-          <%= image_tag(user.avatar, size: 64, alt: user.username) %>
+				<figure class="image">
+          <%= image_tag user_avatar(current_user, 100) %>
 				</figure>
 			</div>
 			<div class="media-content">

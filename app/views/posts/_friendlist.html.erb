@@ -4,8 +4,8 @@
   <% friends.each do |friend| %>
     <article class="media">
       <div class="media-left">
-        <figure class="image is-64x64">
-          <%= image_tag friend.avatar(resource, 100), class: 'rounded' %>
+        <figure class="image">
+          <%= image_tag user_avatar(friend, 64), class: 'is-rounded' %>
         </figure>
       </div>
       <div class="media-content">

@@ -46,7 +46,7 @@
                 </button>
               </div>
               <div class="navbar-dropdown is-right">
-                <%= link_to "Edit", edit_user_path(id: current_user.id), class: "navbar-item" %>
+                <%= link_to "Edit", edit_user_registration_path(id: current_user.id), class: "navbar-item" %>
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "navbar-item" %>
               </div>
             </div>

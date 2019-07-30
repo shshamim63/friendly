@@ -38,9 +38,16 @@
               </div>
             <% end %>
       		</article>
-          <% post.images.each do |image| %>
-            <%= image_tag image  %>
-          <% end %>
+          <br>
+          <div class="container is-fluid">
+            <div class="columns is-multiline">
+              <% post.images.each do |image| %>
+              <div class="column is-one-quarter">
+                <%= image_tag image  %>
+              </div>
+              <% end %>
+            </div>
+          </div>
           <%= post.content %>
           <%= render 'likes/reaction_count', object: post %>
           <%= render 'likes/reaction', object: post %>

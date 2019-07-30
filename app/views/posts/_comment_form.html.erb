@@ -8,6 +8,12 @@
                   autofocus: true %>
     </div>
   </div>
+
+  <div class="field">
+    <%= f.label 'Profile Photo' %><br />
+    <%= f.file_field :image, autofocus: true %>
+  </div>
+
   <%= comment.button :submit, 'Comment', class: 'button is-info is-pulled-right' %>
   <br>
   <br>

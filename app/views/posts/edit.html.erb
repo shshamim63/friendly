@@ -4,6 +4,9 @@
     <%= form.text_area :content %>
   </div>
 
+  <% @post.images.each do |image| %>
+    <%= image_tag(image) %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

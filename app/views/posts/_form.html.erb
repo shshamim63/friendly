@@ -1,5 +1,6 @@
 <%= simple_form_for( @post ) do |post| %>
   <%= post.error_notification %>
+
   <div class='field'>
     <div class='control'>
       <%= post.input :content, label: 'Create Post', input_html: { class: "textarea "},
@@ -8,6 +9,12 @@
                   autofocus: true %>
     </div>
   </div>
+
+  <div class="field">
+    <%= f.label 'Profile Photo' %><br />
+    <%= f.file_field :images, multiple: true, autofocus: true %>
+  </div>
+
   <%= post.button :submit, class: 'button is-info is-pulled-right' %>
   <br>
   <br>

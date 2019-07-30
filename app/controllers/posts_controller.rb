@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    @post.images.attach(params[:post][:images])
 
     if @post.save
       redirect_to posts_path
@@ -56,6 +57,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content, images: [])
+    params.require(:post).permit(:content)
   end
 end

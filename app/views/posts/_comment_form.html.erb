@@ -10,8 +10,8 @@
   </div>
 
   <div class="field">
-    <%= f.label 'Update Photo?' %><br />
-    <%= f.file_field :image, autofocus: true %>
+    <%= comment.label 'Update Photo?' %><br />
+    <%= comment.file_field :image %>
   </div>
 
   <%= comment.button :submit, 'Comment', class: 'button is-info is-pulled-right' %>

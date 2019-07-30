@@ -11,8 +11,8 @@
   </div>
 
   <div class="field">
-    <%= f.label 'Update Photo?' %><br />
-    <%= f.file_field :images, multiple: true, autofocus: true %>
+    <%= post.label 'Update Photo?' %><br />
+    <%= post.file_field :images, multiple: true %>
   </div>
 
   <%= post.button :submit, class: 'button is-info is-pulled-right' %>

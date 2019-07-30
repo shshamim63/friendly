@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
   before_action :find_post
 
   def create
-    @comment = @post.comments.build(post_params)
+    @comment = @post.comments.build(user_id: current_user.id, content: params[:comment][:content])
+    @comment.image.attach(params[:comment][:image])
 
     if @comment.save
       redirect_back fallback_location: root_path
@@ -14,9 +15,5 @@ class CommentsController < ApplicationController
 
   def find_post
     @post = Post.find(params[:post_id])
-  end
-
-  def comment_params
-    params.require(:comment).permit(:content, :user_id, :post_id, :image)
   end
 end

@@ -33,12 +33,22 @@
         <%= render 'likes/reaction_count', object: post %>
         <%= render 'likes/reaction', object: post %>
       </ol>
-      <%= render 'posts/comments', post: post %>
+      <% commentcontent = post.comments.order("created_at DESC").last(2) %>
+      <% if commentcontent.count > 0 %>
+        <% commentcontent.each do |comment| %>
+          <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong>
+          <%= image_tag(comment.image)if comment.image.attached? %>
+          <%= comment.content %>
+          <%= render 'likes/reaction_count', object: comment %>
+          <%= render 'likes/reaction', object: comment %>
+          <br>
+        <% end %>
+      <% end %>
       <% if current_user.friend?(post.user) || current_user== post.user %>
         <%= render 'posts/comment_form', post: post %>
       <% end %>
       <% if post.comments.count > 2 %>
-        <%= link_to 'View more Comments', posts_path %>
+        <%= link_to 'View more Comments', post_path(id: post.id) %>
       <% end %>
     <% end %>
   </div>

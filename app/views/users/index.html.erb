@@ -1,4 +1,17 @@
 <% @user.each do |user| %>
-  <%= user.full_name %><br>
+  <article class="media">
+    <div class="media-left">
+      <figure class="image">
+        <%= image_tag user_avatar(user, 64), class: 'is-rounded' %>
+      </figure>
+    </div>
+    <div class="media-content top-margin">
+      <div class="content">
+        <p>
+            <strong> <%= link_to "#{user.full_name}", user_path(id: user.id) %></strong>
+        </p>
+      </div>
+    </div>
+  </article>
   <%= render 'friendships/friend_status', user: user %>
 <% end %>

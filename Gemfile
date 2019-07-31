@@ -33,6 +33,8 @@ gem 'simple_form'
 # Use ActiveStorage variant
 gem 'mini_magick'
 gem 'flashee'
+gem 'omniauth-facebook'
+gem 'omniauth-google'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

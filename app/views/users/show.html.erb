@@ -33,7 +33,7 @@
         <%= render 'likes/reaction_count', object: post %>
         <%= render 'likes/reaction', object: post %>
       </ol>
-      <% commentcontent = post.comments.order("created_at DESC").last(2) %>
+      <% commentcontent = post.comments.commentindex %>
       <% if commentcontent.count > 0 %>
         <% commentcontent.each do |comment| %>
           <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong>

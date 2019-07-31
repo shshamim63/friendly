@@ -32,10 +32,17 @@
             </div>
           <% end %>
     		</article>
-      <%= @post.content %>
-      <% @post.images.each do |image| %>
-        <%= image_tag(image) %>
-      <% end %>
+        <%= @post.content %>
+        <br>
+        <div class="container is-fluid">
+          <div class="columns is-multiline">
+            <% @post.images.each do |image| %>
+              <div class="column is-one-third">
+                <%= image_tag tumbnail(image, 300)  %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       <%= render 'likes/reaction_count', object: @post %>
       <%= render 'likes/reaction', object: @post %>
       <br>

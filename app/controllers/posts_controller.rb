@@ -19,10 +19,11 @@ class PostsController < ApplicationController
     @post.images.attach(params[:post][:images])
 
     if @post.save
-      redirect_to posts_path
       flash.now[:success] = 'Post was successfully created.'
+      redirect_to posts_path
     else
-      render 'new'
+      flash.now[:danger] = 'unable to create post'
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -36,8 +37,8 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to session.delete(:return_to)
       flash.now[:success] = 'Post was successfully updated.'
+      redirect_to session.delete(:return_to)
     else
       render 'edit'
     end
@@ -45,8 +46,8 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to root_path
     flash.now[:danger] = 'Post was successfully destroyed.'
+    redirect_to root_path
   end
 
 

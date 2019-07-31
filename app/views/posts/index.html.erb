@@ -11,7 +11,7 @@
           <article class="media">
       			<div class="media-left">
       				<figure class="image is-64x64">
-                <%= image_tag user_avatar(post.user, 100), class: 'rounded is-circle' %>
+                <%= image_tag user_avatar(post.user, 100), class: 'is-rounded' %>
       				</figure>
       			</div>
       			<div class="media-content">
@@ -38,17 +38,17 @@
               </div>
             <% end %>
       		</article>
-          <br>
+          <%= post.content %>
           <div class="container is-fluid">
             <div class="columns is-multiline">
               <% post.images.each do |image| %>
-              <div class="column is-one-quarter">
-                <%= image_tag image  %>
+              <div class="column is-one-third">
+                <%= image_tag tumbnail(image, 300)  %>
               </div>
               <% end %>
             </div>
           </div>
-          <%= post.content %>
+          <br>
           <%= render 'likes/reaction_count', object: post %>
           <%= render 'likes/reaction', object: post %>
           <br>

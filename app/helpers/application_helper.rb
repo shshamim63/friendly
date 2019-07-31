@@ -6,4 +6,8 @@ module ApplicationHelper
       gravatar_image_url(user.email, size: size)
     end
   end
+
+  def tumbnail(image, size=40)
+      image.variant(resize: "#{size}x#{size}!")
+  end
 end

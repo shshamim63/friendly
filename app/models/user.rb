@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }
   validates :first_name, :last_name, :username, :gender, :birthday,
     presence: true
+  validate :avatar_type
 
   def friends
     friends_array = friendships.map do |friendship|
@@ -47,5 +48,15 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def avatar_type
+    if avatar.attached?
+      if !avatar.content_type.in?(%('image/jpeg image/png'))
+        errors.add(:avatar, 'nedd to be a jpeg/png')
+      end
+    end
   end
 end

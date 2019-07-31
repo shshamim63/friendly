@@ -6,8 +6,8 @@ class CommentsController < ApplicationController
     @comment.image.attach(params[:comment][:image])
 
     if @comment.save
-      redirect_back fallback_location: root_path
       flash.now[:success] = 'Comment was successfully created.'
+      redirect_back fallback_location: root_path
     end
   end
 

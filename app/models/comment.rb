@@ -9,4 +9,15 @@ class Comment < ApplicationRecord
 
   validates :content, presence: true
   validates :user_id, presence: true
+  validate :image_type
+
+  private
+
+  def image_type
+    if image.attached?
+      if !image.content_type.in?(%('image/jpeg image/png image/gif'))
+        errors.add(:image, 'nedd to be a jpeg/png/gif')
+      end
+    end
+  end
 end

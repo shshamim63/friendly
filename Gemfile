@@ -32,6 +32,7 @@ gem 'devise'
 gem 'simple_form'
 # Use ActiveStorage variant
 gem 'mini_magick'
+gem 'flashee'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

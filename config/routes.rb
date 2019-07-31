@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   root 'posts#index'
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :posts  do
     resources :comments
   end
 
-  resources :likes, except: [:index, :new, :create, :edit, :update, :show, :destroy] do
+  resources :likes, only: [] do
     collection do
       get ':object_type/:object_id/likes', to: 'likes#index', as: 'index'
       post ':object_type/:object_id/likes', to: 'likes#create', as: 'create'
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :friendships, except: [:index, :new, :create, :edit, :update, :show, :destroy] do
+    resources :friendships, only: [] do
       collection do
         post :add, to: 'friendships#add'
         post :unfriend, to: 'friendships#unfriend'

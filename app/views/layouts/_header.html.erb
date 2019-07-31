@@ -72,7 +72,7 @@
       <% end %>
     </div>
     <div class="left-margin">
-      <%= link_to '<i class="fab fa-facebook-square"></i>'.html_safe, edit_user_registration_path(current_user), class: "button  is-link is-outlined" %>
+      <%= link_to '<i class="fab fa-facebook-square"></i>'.html_safe, user_facebook_omniauth_authorize_path, class: "button  is-link is-outlined" %>
       <%= link_to '<i class="fab fa-google-plus-square"></i>'.html_safe, edit_user_registration_path(current_user), class: "button  is-link is-outlined" %>
     </div>
   <% end %>

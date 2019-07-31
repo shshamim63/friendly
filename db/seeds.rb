@@ -24,10 +24,10 @@ User.create(
   birthday: '06-10-1942'
 )
 User.create(
-  first_name: 'Jhon',
+  first_name: 'John',
   last_name: 'Wick',
-  username: 'Jhon',
-  email: 'jhon@wick.com',
+  username: 'John',
+  email: 'john@wick.com',
   password: '123456',
   gender: 'male',
   birthday: '06-11-1990'

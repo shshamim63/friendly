@@ -1,16 +1,16 @@
-<div class="columns">
-  <div class="column is-three-fifths">
+<div class="columns is-centered">
+  <div class="column is-three-fifths has-background-white">
     <ol class="microposts">
       <div>
         <article class="media">
     			<div class="media-left">
     				<figure class="image is-64x64">
-              <%= image_tag user_avatar(@post.user, 100), class: 'rounded' %>
+              <%= image_tag user_avatar(@post.user, 100), class: 'is-rounded' %>
     				</figure>
     			</div>
     			<div class="media-content">
-    				<div class="content">
-    					<p>
+    				<div class="content add-important">
+    					<p class="add-important top-margin-index">
                 <strong> <%= link_to "#{@post.user.username}", user_path(id: @post.user.id) %></strong>
     					</p>
               <small> <%= time_ago_in_words(@post.created_at) %> </small>
@@ -33,7 +33,7 @@
           <% end %>
     		</article>
         <%= @post.content %>
-        <br>
+        <hr>
         <div class="container is-fluid">
           <div class="columns is-multiline">
             <% @post.images.each do |image| %>
@@ -43,6 +43,7 @@
             <% end %>
           </div>
         </div>
+        <br>
       <%= render 'likes/reaction_count', object: @post %>
       <%= render 'likes/reaction', object: @post %>
       <br>

@@ -1,7 +1,7 @@
 <div class="">
   <div class="">
-    <i class="fas fa-thumbs-up"> (<%= object.likes.liking.count %>) </i>
-    <i class="fas fa-thumbs-down">(<%= object.likes.disliking.count %>)</i>
-    <i class="fas fa-grin-squint">(<%= object.likes.laughing.count %>)</i>
+    <%= image_tag('likeicon.svg', class: 'icon')%> (<%= object.likes.liking.count %>)
+    <%= image_tag('likeicon.svg', class: 'icon rotate')%>(<%= object.likes.disliking.count %>)
+    <%= image_tag('laughingicon.svg', class: 'icon')%>(<%= object.likes.laughing.count %>)
   </div>
 </div>

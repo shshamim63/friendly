@@ -7,7 +7,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook]
+         :omniauthable, omniauth_providers: [:facebook]
+
+  validates :email, presence: true, length: { maximum: 255 }
+  validates :first_name, :last_name, :gender, :birthday,
+    presence: true
+  validate :avatar_type
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -15,12 +20,6 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: :friend_id
   has_one_attached :avatar
-
-
-  validates :email, presence: true, length: { maximum: 255 }
-  validates :first_name, :last_name, :gender, :birthday,
-    presence: true
-  validate :avatar_type
 
   def friends
     friends_array = friendships.map do |friendship|
@@ -52,17 +51,16 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    find_or_initialize_by(provider: auth.provider, uid: auth.uid) do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.first_name = auth.info.name   # assuming the user model has a name
-      user.last_name = auth.info.name
-      user.username = auth.info.name
-      user.birthday = auth.info.birthday
-      user.gender = auth.info.gender # assuming the user model has an image
-      # If you are using confirmable and the provider(s) you use validate emails,
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.birthday = auth.extra.raw_info.birthday
+      user.gender = auth.extra.raw_info.gender
+      #user.avatar = auth.extra.raw_info.picture.data.url
+
+      user.save
     end
   end
 
@@ -75,7 +73,6 @@ class User < ApplicationRecord
   end
 
   private
-
   def avatar_type
     if avatar.attached?
       if !avatar.content_type.in?(%('image/jpeg image/png'))

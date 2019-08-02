@@ -23,45 +23,40 @@
       <div class="navbar-item">
         <div class="field is-grouped">
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
+            <a class="navbar-link">
               <span class="icon">
                 <% pending_list = current_user.pending(current_user) %>
                 <i class="fas fa-bell"><%= pending_list.count %></i>
               </span>
             </a>
-            <div class="navbar-dropdown is-boxed">
-              <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
-                Overview
-              </a>
-              <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
-                Modifiers
-              </a>
-              <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
-                Columns
-              </a>
-              <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
-                Layout
-              </a>
-              <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
-                Form
-              </a>
-              <hr class="navbar-divider">
-              <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
-                Elements
-              </a>
-              <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-                Components
-              </a>
+            <div class="navbar-dropdown is-boxed is-right">
+              <% pending_list.each do |user|%>
+                <div class="navbar-item">
+                  <%= link_to "#{user.full_name}", user_path(id: user.id) %>
+                  <%= link_to 'Confirm', accept_user_friendships_path(user_id: user.id), method: :post, class:'button is-small has-background-info' %>
+                  <%= link_to 'Delete', reject_user_friendships_path(user_id: user.id), method: :post, class:'button is-small' %>
+                </div>
+              <% end %>
             </div>
           </div>
-          <p class="control">
-            <a class="button is-primary" href="https://github.com/jgthms/bulma/releases/download/0.7.5/bulma-0.7.5.zip">
-              <span class="icon">
-                <i class="fas fa-download"></i>
-              </span>
-              <span>Download</span>
+        </div>
+      </div>
+      <%= link_to "Connect", users_path, class: "navbar-item"%>
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              <i class="fas fa-sort-down"></i>
             </a>
-          </p>
+            <div class="navbar-dropdown is-boxed is-right">
+                <div class="navbar-item">
+                  <%= link_to "Edit", edit_user_registration_path(current_user), class: "navbar-item" %>
+                </div>
+                <div class="navbar-item">
+                  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "navbar-item" %>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

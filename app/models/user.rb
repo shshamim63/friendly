@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class User < ApplicationRecord
   enum gender: [ :male, :female, :other ]
 
@@ -59,7 +61,8 @@ class User < ApplicationRecord
       user.username =  "#{auth.info.first_name}" + ' ' + "#{auth.info.last_name}"
       user.birthday = auth.extra.raw_info.birthday
       user.gender = auth.extra.raw_info.gender
-      #user.avatar = auth.extra.raw_info.picture.data.url
+      downloaded_image = open(auth.extra.raw_info.picture.data.url)
+      user.avatar.attach(io: downloaded_image  , filename: "foo.jpeg")
 
       user.save
     end

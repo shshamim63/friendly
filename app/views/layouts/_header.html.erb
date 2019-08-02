@@ -1,63 +1,68 @@
-<nav class="navbar bg-blue is-fixed-top" role="navigation" aria-label="main navigation">
+<nav class="navbar is-transparent">
   <div class="navbar-brand">
-    <%= link_to image_tag("logo.png", class: "img-responsive navbar-item", id: "logo"), root_path %>
-
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+    <%= link_to image_tag("logo.png", id: "logo"), root_path, class: "navbar-item" %>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
-  <% if user_signed_in? %>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+
+
     <div class="navbar-end">
       <div class="navbar-item">
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <div class="navbar-item">
-              <%= link_to "#{image_tag user_avatar(current_user, 25), class: 'signup-picture' } #{current_user.username}".html_safe, user_path(id: current_user.id) %>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <div class="">
-                <div class="dropdown-trigger">
-                  <a class="nav-icon" aria-haspopup="true" aria-controls="dropdown-menu3">
-                    <span class="icon nav-icon">
-                      <% pending_list = current_user.pending(current_user) %>
-                      <i class="fas fa-bell"><%= pending_list.count %></i>
-                    </span>
-                  </a>
-                </div>
-              </div>
-              <ol class="navbar-dropdown is-right">
-                <% pending_list.each do |user|%>
-                  <li href="#" class="navbar-item">
-                    <%= link_to "#{user.full_name}", user_path(id: user.id), class: 'nav-right' %>
-                    <%= link_to 'Confirm', accept_user_friendships_path(user_id: user.id), method: :post, class:'button is-small has-background-info' %><br>
-                    <%= link_to 'Delete', reject_user_friendships_path(user_id: user.id), method: :post, class:'button is-small' %><br><br>
-                  </li>
-                <% end %>
-              </ol>
-            </div>
-            <div class="navbar-item">
-              <strong><%= link_to "Connect", users_path %></strong>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <div  class="">
-                <div class="dropdown-trigger">
-                  <a class="" aria-haspopup="true" aria-controls="dropdown-menu3">
-                    <span class="icon nav-icon">
-                      <i class="fas fa-sort-down is-darker"></i>
-                    </span>
-                  </a>
-                </div>
-                <div class="navbar-dropdown is-right">
-                  <%= link_to "Edit", edit_user_registration_path(current_user), class: "navbar-item" %>
-                  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "navbar-item" %>
-                </div>
-              </div>
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms">
+              <span class="icon">
+                <i class="fab fa-twitter"></i>
+              </span>
+              <span>
+                Tweet
+              </span>
+            </a>
+          </p>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
+              Docs
+            </a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
+                Overview
+              </a>
+              <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
+                Modifiers
+              </a>
+              <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+                Columns
+              </a>
+              <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+                Layout
+              </a>
+              <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+                Form
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
+                Elements
+              </a>
+              <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+                Components
+              </a>
             </div>
           </div>
+          <p class="control">
+            <a class="button is-primary" href="https://github.com/jgthms/bulma/releases/download/0.7.5/bulma-0.7.5.zip">
+              <span class="icon">
+                <i class="fas fa-download"></i>
+              </span>
+              <span>Download</span>
+            </a>
+          </p>
         </div>
       </div>
     </div>
-  <% end %>
+  </div>
 </nav>

@@ -7,13 +7,14 @@
     <%= render 'posts/friendlist', user: @user %>
   </div>
   <div class="column is-three-fifths">
-    <% if @user == current_user %>
-      <%= render 'posts/form', post: @post %>
-    <% end %>
-    <br>
+    <div class="box has-background-white">
+      <% if @user == current_user %>
+        <%= render 'posts/form', post: @post %>
+      <% end %>
+    </div>
     <% @posts.each do |post| %>
-      <ol class="microposts">
-        <div>
+      <div class="box has-background-white">
+        <ol class="microposts">
           <article class="media">
       			<div class="media-left">
       				<figure class="image is-64x64">
@@ -29,37 +30,38 @@
       				</div>
       			</div>
       		</article>
-        <%= post.content %>
-        <div class="container is-fluid">
-          <div class="columns is-multiline">
-            <% post.images.each do |image| %>
-              <div class="column is-one-third">
-                <%= image_tag tumbnail(image, 300)  %>
-              </div>
-            <% end %>
+          <%= post.content %>
+          <div class="container is-fluid">
+            <div class="columns is-multiline">
+              <% post.images.each do |image| %>
+                <div class="column is-one-third">
+                  <%= image_tag tumbnail(image, 300)  %>
+                </div>
+              <% end %>
+            </div>
           </div>
-        </div>
-        <br>
-        <%= render 'likes/reaction_count', object: post %>
-        <%= render 'likes/reaction', object: post %>
-      </ol>
-      <% commentcontent = post.comments.commentindex %>
-      <% if commentcontent.count > 0 %>
-        <% commentcontent.each do |comment| %>
-          <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong>
-          <%= image_tag(comment.image)if comment.image.attached? %>
-          <%= comment.content %>
-          <%= render 'likes/reaction_count', object: comment %>
-          <%= render 'likes/reaction', object: comment %>
           <br>
+          <%= render 'likes/reaction_count', object: post %>
+          <%= render 'likes/reaction', object: post %>
+        </ol>
+        <% commentcontent = post.comments.commentindex %>
+        <% if commentcontent.count > 0 %>
+          <% commentcontent.each do |comment| %>
+            <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong>
+            <%= image_tag(comment.image)if comment.image.attached? %>
+            <%= comment.content %>
+            <%= render 'likes/reaction_count', object: comment %>
+            <%= render 'likes/reaction', object: comment %>
+            <br>
+          <% end %>
         <% end %>
-      <% end %>
-      <% if current_user.friend?(post.user) || current_user== post.user %>
-        <%= render 'posts/comment_form', post: post %>
-      <% end %>
-      <% if post.comments.count > 2 %>
-        <%= link_to 'View more Comments', post_path(id: post.id) %>
-      <% end %>
+        <% if current_user.friend?(post.user) || current_user== post.user %>
+          <%= render 'posts/comment_form', post: post %>
+        <% end %>
+        <% if post.comments.count > 2 %>
+          <%= link_to 'View more Comments', post_path(id: post.id) %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

@@ -3,12 +3,11 @@
     <%= render 'profile', user: current_user %>
   </div>
   <div class="column is-three-fifths">
-    <div class="box has-background-white add-important">
+    <div class="box">
       <%= render 'form', post: @post %>
     </div>
-    <br>
-    <div class="box add-important">
-      <% @posts.each do |post| %>
+    <% @posts.each do |post| %>
+      <div class="box">
         <ol class="microposts">
           <div>
             <article class="media">
@@ -78,10 +77,10 @@
         <% if post.comments.count > 1 %>
           <%= link_to 'View more Comments', post_path(id: post.id) %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
-  <div class="column has-background-white">
+  <div class="column">
     <%= render 'friendlist', user: current_user %>
   </div>
 </div>

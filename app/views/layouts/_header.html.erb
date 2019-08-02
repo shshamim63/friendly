@@ -1,4 +1,4 @@
-<nav class="navbar is-transparent">
+<nav class="navbar is-info">
   <div class="navbar-brand">
     <%= link_to image_tag("logo.png", id: "logo"), root_path, class: "navbar-item" %>
     <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
@@ -12,21 +12,22 @@
 
 
     <div class="navbar-end">
+      <%= link_to user_path(id: current_user.id), class: "navbar-item" do %>
+        <figure class="image">
+          <%= image_tag user_avatar(current_user, 25), class:"is-rounded" %>
+        </figure>
+        <span class= "ml">
+          <%= current_user.username %>
+        </span>
+      <% end %>
       <div class="navbar-item">
         <div class="field is-grouped">
-          <p class="control">
-            <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms">
-              <span class="icon">
-                <i class="fab fa-twitter"></i>
-              </span>
-              <span>
-                Tweet
-              </span>
-            </a>
-          </p>
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
-              Docs
+              <span class="icon">
+                <% pending_list = current_user.pending(current_user) %>
+                <i class="fas fa-bell"><%= pending_list.count %></i>
+              </span>
             </a>
             <div class="navbar-dropdown is-boxed">
               <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">

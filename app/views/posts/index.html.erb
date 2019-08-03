@@ -8,79 +8,101 @@
     </div>
     <% @posts.each do |post| %>
       <div class="box">
-        <ol class="microposts">
-          <div>
-            <article class="media">
-        			<div class="media-left">
-        				<figure class="image is-64x64">
-                  <%= image_tag user_avatar(post.user, 100), class: 'is-rounded' %>
-        				</figure>
-        			</div>
-        			<div class="media-content">
-        				<div class="content add-important">
-        					<p class="add-important top-margin-index">
-                    <strong> <%= link_to "#{post.user.username}", user_path(id: post.user.id) %></strong>
-        					</p>
-                  <small> <%= time_ago_in_words(post.created_at) %> </small>
-        				</div>
-        			</div>
-              <% if post.user == current_user %>
-                <div class="dropdown is-right is-hoverable">
-                  <div class="dropdown-trigger">
-                    <span class="icon is-small">
-                      <i class="fas fa-ellipsis-h has-dropdown "></i>
-                    </span>
-                  </div>
-                  <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                    <div class="dropdown-content">
-                      <strong> <%= link_to 'Edit', edit_post_path(id: post.id), class: "dropdown-item" %></strong>
-                      <strong> <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %></strong>
-                    </div>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+               <%= image_tag user_avatar(post.user, 100) %>
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <div class="">
+                <strong><%= link_to "#{post.user.username}", user_path(id: post.user.id) %></strong>
+                <br>
+                <small><%= time_ago_in_words(post.created_at) %></small>
+                <br>
+                <%= post.content %>
+                <div class="container is-fluid">
+                  <div class="columns is-multiline">
+                    <% post.images.each do |image| %>
+                      <div class="column is-one-third">
+                        <%= image_tag tumbnail(image, 300) %>
+                      </div>
+                    <% end %>
                   </div>
                 </div>
-              <% end %>
-        		</article>
-            <div class="top-like">
-              <%= post.content %>
-            </div>
-            <hr>
-            <div class="container is-fluid">
-              <div class="columns is-multiline">
-                <% post.images.each do |image| %>
-                <div class="column is-one-third">
-                  <%= image_tag tumbnail(image, 300)  %>
-                </div>
-                <% end %>
+                <br>
+                <%= render 'likes/reaction_count', object: post %>
+                <hr>
+                <small><%= render 'likes/reaction', object: post %></small>
               </div>
             </div>
-            <br>
-            <%= render 'likes/reaction_count', object: post %>
-            <%= render 'likes/reaction', object: post %>
-            <br>
+            <% commentcontent = post.comments.commentindex %>
+            <% if commentcontent.count > 0 %>
+              <% commentcontent.each do |comment| %>
+                <article class="media">
+                  <figure class="media-left">
+                    <p class="image is-48x48">
+                      <%= image_tag user_avatar(comment.user, 100) %>
+                    </p>
+                  </figure>
+                  <div class="media-content">
+                    <div class="content">
+                      <div>
+                        <strong><%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong>
+                        <br>
+                        <small><%= time_ago_in_words(comment.created_at) %></small>
+                        <br>
+                        <%= comment.content %>
+                        <br>
+                        <%= image_tag tumbnail(comment.image, 300) if comment.image.attached? %>
+                        <%= render 'likes/reaction_count', object: comment %>
+                        <hr>
+                        <small><%= render 'likes/reaction', object: comment %></small>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              <%end%>
+            <%end%>
+            <% if post.comments.count > 1 %>
+              <%= link_to 'View more Comments', post_path(id: post.id) %>
+            <% end %>
           </div>
-        </ol>
-        <% commentcontent = post.comments.commentindex %>
-        <% if commentcontent.count > 0 %>
-          <% commentcontent.each do |comment| %>
-            <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong>
-            <%= image_tag(comment.image)if comment.image.attached? %>
-            <%= comment.content %>
-            <%= render 'likes/reaction_count', object: comment %>
-            <%= render 'likes/reaction', object: comment %>
-            <br>
-          <% end %>
-        <% end %>
-        <hr>
+          <div class="media-right">
+            <% if post.user == current_user %>
+              <div class="dropdown is-right is-hoverable">
+                <div class="dropdown-trigger">
+                  <span class="icon is-small">
+                    <i class="fas fa-ellipsis-h has-dropdown "></i>
+                  </span>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div class="dropdown-content">
+                    <strong> <%= link_to 'Edit', edit_post_path(id: post.id), class: "dropdown-item" %></strong>
+                    <strong> <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %></strong>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </article>
         <% if current_user.friend?(post.user) || current_user== post.user %>
-          <%= render 'comment_form', post: post %>
-        <% end %>
-        <% if post.comments.count > 1 %>
-          <%= link_to 'View more Comments', post_path(id: post.id) %>
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-48x48">
+                <%= image_tag user_avatar(current_user, 64) %>
+              </p>
+            </figure>
+            <div class="media-content">
+              <%= render 'comment_form', post: post %>
+            </div>
+          </article>
         <% end %>
       </div>
     <% end %>
   </div>
-  <div class="column">
-    <%= render 'friendlist', user: current_user %>
-  </div>
+    <div class="column">
+      <%= render 'friendlist', user: current_user %>
+    </div>
 </div>

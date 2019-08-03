@@ -9,7 +9,7 @@
 			</div>
 			<div class="media-content">
 				<div class="content">
-					<p>
+					<p class="profile-name">
             <strong><%= "#{user.first_name} #{user.last_name}" %></strong><br />
 						<small><%= "#{user.username}" %></small>
 					</p>
@@ -17,5 +17,5 @@
 			</div>
 		</article>
 	</div>
-  <p class= "has-background-white">Birthdate: <%= user.birthday.to_formatted_s(:long) %></p>
+  <p class= "has-background-white profile-info">Birthdate: <%= user.birthday.to_formatted_s(:long) %></p>
 </nav>

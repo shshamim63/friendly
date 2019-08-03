@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    @post.images.attach(params[:post][:images])
+    @post.images.attach(params[:post][:images]) if params[:post][:images] != nil
 
     if @post.save
       flash.now[:success] = 'Post was successfully created.'

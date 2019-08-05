@@ -4,12 +4,12 @@
 <% else %>
   <% if current_status&.pending? %>
     <% if current_status.user == current_user %>
-      <strong class= "top-like">Pending</strong> <%= link_to 'Cancel Friend Request', cancelled_user_friendships_path(user_id: user.id), method: :post,class: 'button top-like is-small' %><br><br>
+      <strong class= "pending top-like">Pending</strong> <%= link_to 'Cancel Friend Request', cancelled_user_friendships_path(user_id: user.id), method: :post,class: 'button top-like is-small is-warning' %><br><br>
     <% else %>
       <%= link_to 'Confirm', accept_user_friendships_path(user_id: user.id), method: :post, class: 'button top-like has-background-info is-small' %><br>
       <%= link_to 'Delete', reject_user_friendships_path(user_id: user.id), method: :post, class: 'button top-like is-small' %><br><br>
     <% end %>
   <% else %>
-    <%= link_to image_tag('add-friend.svg', class: 'icon icon-right') + "Add Friend", add_user_friendships_path(user_id: user.id), method: :post, class: 'button top-like is-small' %><br><br>
+    <%= link_to image_tag('add-friend.svg', class: 'icon icon-right') + "Add Friend", add_user_friendships_path(user_id: user.id), method: :post, class: 'button top-like is-small is-info' %><br><br>
   <% end %>
 <% end %>

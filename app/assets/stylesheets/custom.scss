@@ -20,6 +20,21 @@
   margin-left: 5px;
 }
 
+.pending {
+    position: relative;
+    top: 5px;
+}
+
+.name-index {
+    position: relative;
+    top: 1.25rem;
+}
+
+.button-pos {
+    position: relative;
+    top: 1.35rem;
+}
+
 .top-space {
   margin-top: 5px;
 }
@@ -123,4 +138,13 @@ hr {
 
 .column {
   padding: 0.75rem 0.20rem;
+}
+
+.navbar-link:not(.is-arrowless) {
+    padding-right: 0;
+}
+
+.navbar-item .icon:only-child, .navbar-link .icon:only-child {
+    margin-left: 0;
+    margin-right: 0.25rem;
 }

@@ -1,27 +1,25 @@
-<div class="is-centered top-space">
-  <div class="box is-three-fifths">
+<div class="columns is-centered">
+  <div class=" box column is-two-fifths">
     <% @user.each do |user| %>
-    <!-- Main container -->
-    <nav class="level">
-        <!-- Left side -->
-        <div class="level-left">
-          <div class="level-item">
-            <%= link_to user_path(id: user.id) do %>
-              <figure class="image">
-                <%= image_tag user_avatar(user, 25), class:"is-rounded" %>
-              </figure>
-              <span class= "ml">
-                <%= user.full_name %>
-              </span>
-            <% end %>
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <%= image_tag user_avatar(user, 25), class:"is-rounded" %>
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong class="name-index">  <%= link_to "#{ user.full_name}", user_path(id: user.id) %></strong>
+              <br>
+
+            </p>
           </div>
         </div>
-
-        <!-- Right side -->
-        <div class="level-right">
-            <%= render 'friendships/friend_status', user: user %>
+        <div class="button-pos media-right">
+          <%= render 'friendships/friend_status', user: user %>
         </div>
-    </nav>
+      </article>
     <% end %>
   </div>
 </div>

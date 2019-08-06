@@ -12,7 +12,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
 
   validates :email, presence: true, length: { maximum: 255 }
-  validates :first_name, :last_name, :gender, :birthday,
+  validates :first_name, :last_name, :gender, :birthday, :username,
     presence: true
   validate :avatar_type
 

@@ -12,8 +12,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
 
   validates :email, presence: true, length: { maximum: 255 }
-  validates :first_name, :last_name, :gender, :birthday, :username,
-    presence: true
+  validates :first_name, :last_name, :gender, :birthday, :username, presence: true
+  validates :gender, :birthday, if: -> { provider.eql? 'facebook' }
   validate :avatar_type
 
   has_many :posts, dependent: :destroy
@@ -61,8 +61,8 @@ class User < ApplicationRecord
       user.username =  "#{auth.info.first_name}" + ' ' + "#{auth.info.last_name}"
       user.birthday = auth.extra.raw_info.birthday
       user.gender = auth.extra.raw_info.gender
-      downloaded_image = open(auth.extra.raw_info.picture.data.url)
-      user.avatar.attach(io: downloaded_image  , filename: "foo.jpeg")
+      # downloaded_image = open(auth.extra.raw_info.picture.data.url)
+      # user.avatar.attach(io: downloaded_image  , filename: "foo.jpeg")
 
       user.save
     end
@@ -71,12 +71,16 @@ class User < ApplicationRecord
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        #byebug
+        user.first_name = data['first_name']
+        user.last_name = data['last_name']
         user.email = data["email"] if user.email.blank?
       end
     end
   end
 
   private
+
   def avatar_type
     if avatar.attached?
       if !avatar.content_type.in?(%('image/jpeg image/png'))

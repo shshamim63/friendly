@@ -4,8 +4,6 @@ describe Comment, type: :model do
   describe "comment's associations" do
     it { should belong_to(:user) }
     it { should belong_to(:post) }
-    it { should belong_to(:reply_from).class_name('Comment').optional.with_foreign_key(:reply_id) }
-    it { should have_many(:replies).class_name('Comment').with_foreign_key(:reply_id) }
     it { should have_many(:likes) }
   end
 

@@ -13,7 +13,6 @@ class User < ApplicationRecord
 
   validates :email, presence: true, length: { maximum: 255 }
   validates :first_name, :last_name, :username, presence: true
-  validates :gender, presence: true, unless: -> { created_with_facebook? }
 
   validate :avatar_type
 
@@ -53,10 +52,6 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def created_with_facebook?
-    provider == 'facebook'
-  end
-
   def self.from_omniauth(auth)
     find_or_initialize_by(provider: auth.provider, uid: auth.uid) do |user|
       user.email = auth.info.email
@@ -64,12 +59,7 @@ class User < ApplicationRecord
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.username =  "#{auth.info.first_name}" + ' ' + "#{auth.info.last_name}"
-      user.birthday = auth.extra.raw_info.birthday
-      user.gender = auth.extra.raw_info.gender
-      # downloaded_image = open(auth.info.image)
-      # byebug
-      # user.avatar.attach(io: downloaded_image  , filename: "foo.jpeg")
-
+    
       user.save
     end
   end
@@ -82,8 +72,6 @@ class User < ApplicationRecord
         user.password = Devise.friendly_token[0, 20]
         user.email = data["email"] if user.email.blank?
         user.username =  data['first_name'] + ' ' + data['last_name']
-        user.birthday = data['birthday']
-        user.gender = data['gender']
 
         user.save
       end

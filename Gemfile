@@ -35,6 +35,7 @@ gem 'mini_magick'
 gem 'flashee'
 gem 'omniauth-facebook'
 gem 'google-cloud-storage'
+gem 'rails-controller-testing'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

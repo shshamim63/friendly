@@ -12,8 +12,9 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
 
   validates :email, presence: true, length: { maximum: 255 }
-  validates :first_name, :last_name, :gender, :birthday, :username, presence: true
-  validates :gender, :birthday, if: -> { provider.eql? 'facebook' }
+  validates :first_name, :last_name, :username, presence: true
+  validates :gender, presence: true, unless: -> { created_with_facebook? }
+
   validate :avatar_type
 
   has_many :posts, dependent: :destroy
@@ -52,6 +53,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def created_with_facebook?
+    provider == 'facebook'
+  end
+
   def self.from_omniauth(auth)
     find_or_initialize_by(provider: auth.provider, uid: auth.uid) do |user|
       user.email = auth.info.email
@@ -61,7 +66,8 @@ class User < ApplicationRecord
       user.username =  "#{auth.info.first_name}" + ' ' + "#{auth.info.last_name}"
       user.birthday = auth.extra.raw_info.birthday
       user.gender = auth.extra.raw_info.gender
-      # downloaded_image = open(auth.extra.raw_info.picture.data.url)
+      # downloaded_image = open(auth.info.image)
+      # byebug
       # user.avatar.attach(io: downloaded_image  , filename: "foo.jpeg")
 
       user.save
@@ -71,10 +77,15 @@ class User < ApplicationRecord
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        #byebug
         user.first_name = data['first_name']
         user.last_name = data['last_name']
+        user.password = Devise.friendly_token[0, 20]
         user.email = data["email"] if user.email.blank?
+        user.username =  data['first_name'] + ' ' + data['last_name']
+        user.birthday = data['birthday']
+        user.gender = data['gender']
+
+        user.save
       end
     end
   end

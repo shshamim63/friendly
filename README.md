@@ -31,9 +31,13 @@ or thing that you believe we should add to the app.
 After cloning:
 
 Run `bundle update` to install the latest version of the gems in the `Gemfile`.
+
 Run `rails db:create` to create a database on your device
+
 Run `rails db:migrate`
+
 Run `rails db:seed`
+
 Run `rails s` to start the server
 
 

@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.build(user_id: current_user.id, content: params[:comment][:content])
-    @comment.image.attach(params[:comment][:image])
+    @comment.image.attach(params[:comment][:image]) if params[:comment][:images] != nil
 
     if @comment.save
       flash.now[:success] = 'Comment was successfully created.'

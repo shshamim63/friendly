@@ -3,10 +3,13 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.build(user_id: current_user.id, content: params[:comment][:content])
-    @comment.image.attach(params[:comment][:image]) if params[:comment][:images] != nil
+    @comment.image.attach(params[:comment][:image])
 
     if @comment.save
       flash.now[:success] = 'Comment was successfully created.'
+      redirect_back fallback_location: root_path
+    else
+      flash.now[:danger] = 'Comment could not be created'
       redirect_back fallback_location: root_path
     end
   end

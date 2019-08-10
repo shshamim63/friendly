@@ -22,6 +22,24 @@ or thing that you believe we should add to the app.
 * Rspec
 
 ---
+## System Requirements
+
+    Ruby version of at least 2.5.3
+    Rails version of at least 5.2.3
+    PostgreSQL version 9 above
+
+After cloning:
+
+Run `bundle update` to install the latest version of the gems in the `Gemfile`.
+
+Run `rails db:create` to create a database on your device
+
+Run `rails db:migrate`
+
+Run `rails db:seed`
+
+Run `rails s` to start the server
+
 
 ## Creators
 

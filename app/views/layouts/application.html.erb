@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class = "has-background-grey-lighter">
   <head>
     <title>Friendly</title>
     <%= csrf_meta_tags %>
@@ -7,11 +7,18 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    </head>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
 
-  <body>
+  <body class ="texter">
+    <%= render 'layouts/header' %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="top-space">
+      <div class="container-gap">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

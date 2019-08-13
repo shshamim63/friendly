@@ -1,0 +1,21 @@
+<nav class="panel box">
+	<p class="panel-heading has-background-grey-light">Profile</p>
+	<div class="panel-block has-background-white">
+		<article class="media">
+			<div class="media-left">
+				<figure class="image">
+          <%= image_tag user_avatar(current_user, 40), class: 'is-rounded' %>
+				</figure>
+			</div>
+			<div class="media-content">
+				<div class="content">
+					<p class="profile-name">
+            <strong><%= "#{user.first_name} #{user.last_name}" %></strong><br />
+						<small><%= "#{user.username}" %></small>
+					</p>
+				</div>
+			</div>
+		</article>
+	</div>
+  <p class= "has-background-white profile-info">Birthdate: <%= user.birthday.to_formatted_s(:long) %></p>
+</nav>

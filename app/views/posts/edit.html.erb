@@ -1,0 +1,14 @@
+<%= form_with(model: @post, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <% @post.images.each do |image| %>
+    <%= image_tag(image) %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

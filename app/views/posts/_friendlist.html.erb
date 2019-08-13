@@ -1,0 +1,22 @@
+<% friends = user.friends %>
+<div class="box has-background-white">
+  <p>Friends(<%= friends.count %>)</p>
+  <div class="top-margin-index">
+    <% friends.each do |friend| %>
+      <article class="media">
+        <div class="media-left">
+          <figure class="image">
+            <%= image_tag user_avatar(friend, 40), class: 'is-rounded' %>
+          </figure>
+        </div>
+        <div class="media-content">
+          <div class="content top-margin-index">
+            <p>
+                <%= link_to "#{friend.username}", user_path(id: friend.id) %>
+            </p>
+          </div>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="navbar-item has-dropdow is-hoverable">
+  <div class="dropdown-trigger">
+    <span class="is-white" aria-haspopup="true" aria-controls="dropdown-menu3">
+      <%= image_tag('thumb-up.svg', class: 'icon') %> <strong>Like</strong>
+    </span>
+  </div>
+  <div class="navbar-dropdown is-right">
+    <div class="columns w-10">
+      <div class="column">
+        <% like_route, like_method = liker(object.class.name, object.id, 'like') %>
+        <%= link_to image_tag('like.svg'), like_route, method: like_method %>
+      </div>
+      <div class="column">
+        <% dislike_route, dislike_method = liker(object.class.name, object.id, 'dislike') %>
+        <%= link_to image_tag('like.svg', class: 'dislike'), dislike_route, method: dislike_method %>
+      </div>
+      <div class="column">
+        <% laugh_route, laugh_method = liker(object.class.name, object.id, 'laugh') %>
+        <%= link_to image_tag('laughing.svg'), laugh_route, method: laugh_method %>
+      </div>
+    </div>
+  </div>
+</div>

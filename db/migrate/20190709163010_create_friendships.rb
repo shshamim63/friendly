@@ -9,7 +9,8 @@ class CreateFriendships < ActiveRecord::Migration[5.2]
     end
 
     add_index :friendships, :status
-    add_index :friendships, [:user_id, :friend_id]
+    add_index :friendships, [:user_id, :friend_id], unique: true,
+              where: '(status IS NULL)'
     add_foreign_key :friendships, :users, column: :friend_id
   end
 end

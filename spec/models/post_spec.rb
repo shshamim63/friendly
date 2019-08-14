@@ -17,6 +17,14 @@ describe Post, type: :model do
         expect(post).not_to be_valid
       end
     end
+
+    context 'when post does not contain a picture' do
+      let(:post) { build(:post, picture: nil) }
+
+      it 'is not a valid post' do
+        expect(post).to be_valid
+      end
+    end
   end
 
   describe "post's associations" do

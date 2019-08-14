@@ -8,47 +8,26 @@
 User.create(
   first_name: 'Homero',
   last_name: 'Simpson',
-  username: 'Homero',
   email: 'homero@simpson.com',
-  password: '123456',
-  gender: 'male',
-  birthday: '04-05-1982'
+  password: '123456'
 )
 User.create(
   first_name: 'Gerald',
   last_name: 'De Rivia',
-  username: 'Gerald',
   email: 'gerald@derivia.com',
-  password: '123456',
-  gender: 'male',
-  birthday: '06-10-1942'
+  password: '123456'
 )
 User.create(
-  first_name: 'John',
+  first_name: 'Jhon',
   last_name: 'Wick',
-  username: 'John',
-  email: 'john@wick.com',
-  password: '123456',
-  gender: 'male',
-  birthday: '06-11-1990'
+  email: 'jhon@wick.com',
+  password: '123456'
 )
 User.create(
   first_name: 'Tony',
   last_name: 'Versetti',
-  username: 'Tony',
   email: 'tony@versetti.com',
-  password: '123456',
-  gender: 'male',
-  birthday: '05-07-1950'
-)
-User.create(
-  first_name: 'Diana',
-  last_name: 'Prince',
-  username: 'WonderWoman',
-  email: 'diana@prince.com',
-  password: '123456',
-  gender: 'female',
-  birthday: '05-07-1995'
+  password: '123456'
 )
 
 Post.create(
@@ -68,7 +47,8 @@ Comment.create(
 Comment.create(
   content: 'Gracias!',
   post: Post.first,
-  user: User.first
+  user: User.first,
+  reply_from: Comment.first
 )
 
 Like.create(

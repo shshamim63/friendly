@@ -26,16 +26,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'gravatar_image_tag'
 gem 'bulma-rails'
 gem 'devise'
-gem 'simple_form'
 # Use ActiveStorage variant
-gem 'mini_magick'
-gem 'flashee'
-gem 'omniauth-facebook'
-gem 'google-cloud-storage'
-gem 'rails-controller-testing'
+# gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -50,7 +44,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers'
-  gem 'capybara'
 end
 
 group :development do

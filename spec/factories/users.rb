@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :user do
     first_name { 'Pepe' }
     last_name { 'Bas' }
-    username { 'PepeBas' }
+    username { 'Asshole' }
     email { Faker::Internet.email }
     gender { 'male' }
     birthday { '05-05-1999' }

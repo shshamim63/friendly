@@ -1,8 +1,0 @@
-<% post.comments.each do |comment| %>
-  <strong> <%= link_to "#{comment.user.username}", user_path(id: comment.user.id) %></strong><br>
-  <%= comment.content %><br>
-  <%= image_tag tumbnail(comment.image, 300)if comment.image.attached? %>
-  <%= render 'likes/reaction_count', object: comment %>
-  <%= render 'likes/reaction', object: comment %>
-  <br>
-<% end %>

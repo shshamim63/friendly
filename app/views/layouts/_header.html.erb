@@ -1,3 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="d-flex flex-grow-1">
+        <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
+        <%= link_to image_tag("logo.png", id: "logo"), root_path, class: "navbar-item" %>
+        <% if user_signed_in? %>
+          <div class="w-100 text-right">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar7">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+        <% end %>
+    </div>
+    <% if user_signed_in? %>
+      <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
+          <ul class="navbar-nav ml-auto flex-nowrap">
+              <li class="nav-item">
+                <%= link_to user_path(id: current_user.id) do %>
+                  <%= image_tag user_avatar(current_user, 25), class:"is-rounded" %>
+                  <span class="text2">
+                    <% if current_user.username.nil? %>
+                      <%= current_user.full_name %>
+                    <% else %>
+                      <%= current_user.username %>
+                    <% end %>
+                  </span>
+                <% end %>
+              </li>
+              <li class="nav-item dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="icon">
+                    <% pending_list = current_user.pending(current_user) %>
+                    <i class="fas fa-bell"><%= pending_list.count %></i>
+                  </span>
+                </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% pending_list.each do |user|%>
+                      <a class="dropdown-item" href="#">
+                        <%= link_to "#{user.full_name}", user_path(id: user.id) %>
+                        <%= link_to 'Confirm', accept_user_friendships_path(user_id: user.id), method: :post, class:'button is-small has-background-info' %>
+                        <%= link_to 'Delete', reject_user_friendships_path(user_id: user.id), method: :post, class:'button is-small' %>
+                      </a>
+                    <% end %>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+                  <a class="nav-link">
+
+                  </a>
+                  <div class="navbar-dropdown is-boxed is-right">
+                    <% pending_list.each do |user|%>
+                      <div class="navbar-item">
+                        <%= link_to "#{user.full_name}", user_path(id: user.id) %>
+                        <%= link_to 'Confirm', accept_user_friendships_path(user_id: user.id), method: :post, class:'button is-small has-background-info' %>
+                        <%= link_to 'Delete', reject_user_friendships_path(user_id: user.id), method: :post, class:'button is-small' %>
+                      </div>
+                    <% end %>
+                  </div>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link">Link</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link">Link</a>
+              </li>
+          </ul>
+      </div>
+    <% end %>
+</nav>
+
+
+
 <nav class="navbar is-info">
   <div class="navbar-brand">
     <%= link_to image_tag("logo.png", id: "logo"), root_path, class: "navbar-item" %>
@@ -13,8 +86,8 @@
   <div id="navbarExampleTransparentExample" class="navbar-menu">
     <div class="navbar-end">
       <%= link_to user_path(id: current_user.id), class: "navbar-item" do %>
+      <%= image_tag user_avatar(current_user, 25), class:"is-rounded" %>
         <figure class="image">
-          <%= image_tag user_avatar(current_user, 25), class:"is-rounded" %>
         </figure>
         <span class= "ml">
           <% if current_user.username.nil? %>
@@ -67,32 +140,3 @@
     </div>
   <% end %>
 </nav>
-
-<script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // Get all "navbar-burger" elements
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-    // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
-
-      // Add a click event on each of them
-      $navbarBurgers.forEach( el => {
-        el.addEventListener('click', () => {
-
-          // Get the target from the "data-target" attribute
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-
-          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
-
-        });
-      });
-    }
-
-  });
-
-</script>

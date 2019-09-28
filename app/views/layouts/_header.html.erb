@@ -33,7 +33,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <% pending_list.each do |user|%>
-              <div class="navbar-item">
+              <div class="navbar-item border">
                 <%= link_to "#{user.full_name}", user_path(id: user.id) %>
                 <%= link_to 'Confirm', accept_user_friendships_path(user_id: user.id), method: :post, class:'button is-small has-background-info' %>
                 <%= link_to 'Delete', reject_user_friendships_path(user_id: user.id), method: :post, class:'button is-small' %>
@@ -49,10 +49,10 @@
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <div class="navbar-item">
+            <div class="navbar-item border">
               <%= link_to "Edit", edit_user_registration_path(current_user), class: "" %>
             </div>
-            <div class="navbar-item">
+            <div class="navbar-item border">
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "" %>
             </div>
           </div>

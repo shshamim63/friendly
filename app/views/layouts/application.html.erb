@@ -11,14 +11,12 @@
     </head>
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
 
-  <body class ="texter">
+  <body class ="bg-deamlight">
     <%= render 'layouts/header' %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <div class="top-space">
-      <div class="container-gap">
-        <%= yield %>
-      </div>
+      <%= yield %>
     </div>
   </body>
 </html>
